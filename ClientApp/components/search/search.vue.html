@@ -1,0 +1,13 @@
+﻿<template>
+    <div>
+        <form>
+            <div class="col-md-12">
+                <label class="checkbox-inline" v-for="site in searchViewModel.sites">
+                    <input type="checkbox" :id="'inlineCheckbox-' + site.id" :value="site.id" v-model="site.selected"> {{ site.name }}
+                </label>
+            </div>
+        </form>
+    </div>
+</template>
+
+<script src="./search.ts"></script>
