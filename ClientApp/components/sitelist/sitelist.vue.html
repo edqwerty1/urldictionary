@@ -1,0 +1,23 @@
+<template>
+    <div>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Link</th>
+            <th scope="col">Url</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="site in sites">
+            <td>{{site.name}}</td>
+            <td><a target="_blanks" :href="site.url">Link</a></td>
+            <td>{{site.url}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+</template>
+
+<script src="./sitelist.ts"></script>

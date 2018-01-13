@@ -5,6 +5,7 @@ using WebsiteDirectory.Models;
 
 namespace website_directory.Controllers
 {
+    [Route("api/[controller]")]
     public class UrlController : Controller
     {
         private readonly WebsiteContext database;
@@ -37,7 +38,7 @@ namespace website_directory.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult AddUrl(UrlViewModel model)
+        public IActionResult AddUrl([FromBody]UrlViewModel model)
         {
             database.WebsiteUrls.Add(new WebsiteUrl
             {
@@ -51,7 +52,7 @@ namespace website_directory.Controllers
             });
 
             database.SaveChanges();
-            return null;
+            return Ok();
         }
 
         [HttpPut("{urlId:int}/[action]")]

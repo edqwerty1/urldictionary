@@ -1,0 +1,49 @@
+<template>
+    <div>
+        <form v-on:submit.prevent="addSite">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" v-model="searchViewModel.name" class="form-control" id="name" placeholder="name">
+              </div>
+              <div class="form-group">
+                <label for="url">Url</label>
+                <input type="text" v-model="searchViewModel.url" class="form-control" id="url" placeholder="http://www.testb2g.co.uk">
+              </div>
+              <div class="form-group">
+                <label for="purposes">Purpose</label>
+                <select class="form-control" id="purposes" v-model="searchViewModel.selectedPurpose">
+                  <option v-for="purpose in searchViewModel.purposes" v-bind:value="purpose.id">{{purpose.name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="companies">Company</label>
+                <select class="form-control" id="companies" v-model="searchViewModel.selectedCompany">
+                  <option v-for="company in searchViewModel.companies" v-bind:value="company.id">{{company.name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="databases">Database</label>
+                <select class="form-control" id="databases" v-model="searchViewModel.selectedDatabase">
+                  <option v-for="database in searchViewModel.databases" v-bind:value="database.id">{{database.name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="modes">Mode</label>
+                <select class="form-control" id="modes" v-model="searchViewModel.selectedMode">
+                  <option v-for="mode in searchViewModel.modes" v-bind:value="mode.id">{{mode.name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="websites">Website</label>
+                <select class="form-control" id="websites" v-model="searchViewModel.selectedWebsite">
+                  <option v-for="website in searchViewModel.websites" v-bind:value="website.id">{{website.name}}</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <router-link to="/search">Cancel</router-link>
+    </div>
+</template>
+
+<script src="./addsite.ts"></script>

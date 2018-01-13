@@ -6,6 +6,7 @@ using WebsiteDirectory.Models;
 
 namespace website_directory.Controllers
 {
+    [Route("api/[controller]")]
     public class SearchController : Controller
     {
         private readonly WebsiteContext database;
@@ -19,16 +20,16 @@ namespace website_directory.Controllers
         {
             return new SearchViewModel
             {
-                Companies = database.Companies.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id }).ToList(),
-                Databases = database.Databases.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id }).ToList(),
-                Modes = database.Modes.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id }).ToList(),
-                Purposes = database.Purposes.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id }).ToList(),
-                Sites = database.Websites.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id }).ToList()
+                Companies = database.Companies.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id, Selected = true }).ToList(),
+                Databases = database.Databases.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id,Selected = true }).ToList(),
+                Modes = database.Modes.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id, Selected = true }).ToList(),
+                Purposes = database.Purposes.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id, Selected = true }).ToList(),
+                Sites = database.Websites.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id, Selected = true }).ToList()
             };
         }
 
         [HttpPost("[action]")]
-        public SitesListViewModel GetUrls(SearchViewModel model)
+        public SitesListViewModel GetUrls([FromBody]SearchViewModel model)
         {
             return new SitesListViewModel
             {

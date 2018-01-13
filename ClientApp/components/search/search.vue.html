@@ -1,13 +1,58 @@
 ﻿<template>
     <div>
-        <form>
+        <form >
             <div class="col-md-12">
                 <label class="checkbox-inline" v-for="site in searchViewModel.sites">
-                    <input type="checkbox" :id="'inlineCheckbox-' + site.id" :value="site.id" v-model="site.selected"> {{ site.name }}
+                    <input v-on:click="search" type="checkbox" :id="'inlineCheckbox-' + site.id" :value="site.id" v-model="site.selected"> {{ site.name }}
+                </label>
+            </div>
+            <div class="col-md-12">
+                <label class="checkbox-inline" v-for="mode in searchViewModel.modes">
+                    <input type="checkbox" :id="'inlineCheckbox-' + mode.id" :value="mode.id" v-model="mode.selected"> {{ mode.name }}
+                </label>
+            </div>
+            <div class="col-md-12">
+                <label class="checkbox-inline" v-for="database in searchViewModel.databases">
+                    <input type="checkbox" :id="'inlineCheckbox-' + database.id" :value="database.id" v-model="database.selected"> {{ database.name }}
+                </label>
+            </div>
+            <div class="col-md-12">
+                <label class="checkbox-inline" v-for="company in searchViewModel.companies">
+                    <input type="checkbox" :id="'inlineCheckbox-' + company.id" :value="company.id" v-model="company.selected"> {{ company.name }}
+                </label>
+            </div>
+            <div class="col-md-12">
+                <label class="checkbox-inline" v-for="purpose in searchViewModel.purposes">
+                    <input type="checkbox" :id="'inlineCheckbox-' + purpose.id" :value="purpose.id" v-model="purpose.selected"> {{ purpose.name }}
                 </label>
             </div>
         </form>
+
+        <router-link to="/addsite">Add Site</router-link>
+
+        <site-list-component v-bind:sites="sites"></site-list-component>
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Url</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="site in sites">
+                    <td>{{site.name}}</td>
+                    <td><a target="_blanks" :href="site.url">Link</a></td>
+                    <td>{{site.url}}</td>
+                  </tr>
+        
+                </tbody>
+              </table>
+            </div>
     </div>
+
+    
 </template>
 
 <script src="./search.ts"></script>
