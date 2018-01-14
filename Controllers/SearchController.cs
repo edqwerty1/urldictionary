@@ -24,7 +24,7 @@ namespace website_directory.Controllers
                 Databases = database.Databases.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id,Selected = true }).ToList(),
                 Modes = database.Modes.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id, Selected = true }).ToList(),
                 Purposes = database.Purposes.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id, Selected = true }).ToList(),
-                Sites = database.Websites.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id, Selected = true }).ToList()
+                Websites = database.Websites.OrderBy(t => t.Name).Select(t => new SearchItem { Name = t.Name, Id = t.Id, Selected = true }).ToList()
             };
         }
 
@@ -38,7 +38,7 @@ namespace website_directory.Controllers
                            && model.Databases.Where(t => t.Selected).Any(c => c.Id == url.Database.Id)
                            && model.Modes.Where(t => t.Selected).Any(c => c.Id == url.Mode.Id)
                            && model.Purposes.Where(t => t.Selected).Any(c => c.Id == url.Purpose.Id)
-                           && model.Sites.Where(t => t.Selected).Any(c => c.Id == url.Website.Id)
+                           && model.Websites.Where(t => t.Selected).Any(c => c.Id == url.Website.Id)
                            )
                 .Select(url => new SitesListDetails
                 {
@@ -48,10 +48,72 @@ namespace website_directory.Controllers
                     Database = url.Database.Name,
                     Mode = url.Mode.Name,
                     Purpose = url.Purpose.Name,
+                    Website = url.Website.Name,
                     Url = url.Url
                 })
                 .ToList()
             };
+        }
+
+                [HttpGet("[action]")]
+        public List<ProfileViewModel> GetProfiles()
+        {
+            return database.Profiles.OrderBy(t => t.Name).Select(t => new ProfileViewModel
+            {
+                Id = t.Id,
+                Name = t.Name,
+                Companies = t.Companies,
+                Purposes = t.Purposes,
+                Websites = t.Websites,
+                Databases = t.Databases,
+                Modes = t.Modes
+            }).ToList();
+        }
+
+        public class ProfileViewModel
+        {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public List<Purpose> Purposes { get; set; }
+        public List<Company> Companies { get; set; }
+        public List<Database> Databases { get; set; }
+        public List<Mode> Modes { get; set; }
+        public List<Website> Websites { get; set; }
+        }
+
+                        [HttpPost("[action]")]
+        public IActionResult AddProfile([FromBody]ProfileViewModel model)
+        {
+            if (database.Profiles.Any(t => t.Name == model.Name))
+                return BadRequest();
+
+            var profile = new Profile{
+                Name = model.Name
+            };
+            profile.Companies = database.Companies.Where(db => model.Companies.Any(m => m.Id == db.Id)).ToList();
+            profile.Databases = database.Databases.Where(db => model.Databases.Any(m => m.Id == db.Id)).ToList();
+            profile.Purposes = database.Purposes.Where(db => model.Purposes.Any(m => m.Id == db.Id)).ToList();
+            profile.Websites = database.Websites.Where(db => model.Websites.Any(m => m.Id == db.Id)).ToList();
+            profile.Modes = database.Modes.Where(db => model.Modes.Any(m => m.Id == db.Id)).ToList();
+
+            database.Profiles.Add(profile);
+            database.SaveChanges();
+            return Ok();
+        }
+
+                                [HttpGet("[action]/{profileName}")]
+        public ProfileViewModel GetProfile(string profileName)
+        {
+            return database.Profiles.Select(t => new ProfileViewModel
+            {
+                Id = t.Id,
+                Name = t.Name,
+                Companies = t.Companies,
+                Purposes = t.Purposes,
+                Websites = t.Websites,
+                Databases = t.Databases,
+                Modes = t.Modes
+            }).First(t => t.Name.ToLower() == profileName.ToLower());
         }
     }
 }

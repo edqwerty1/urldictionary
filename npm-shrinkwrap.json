@@ -202,9 +202,9 @@
       "dev": true
     },
     "bootstrap": {
-      "version": "4.0.0-alpha.6",
-      "from": "bootstrap@4.0.0-alpha.6",
-      "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.0.0-alpha.6.tgz",
+      "version": "4.0.0-beta.3",
+      "from": "bootstrap@4.0.0-beta.3",
+      "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.0.0-beta.3.tgz",
       "dev": true
     },
     "brace-expansion": {
@@ -2298,6 +2298,12 @@
       "resolved": "https://registry.npmjs.org/pinkie-promise/-/pinkie-promise-2.0.1.tgz",
       "dev": true
     },
+    "popper.js": {
+      "version": "1.12.9",
+      "from": "popper.js@latest",
+      "resolved": "https://registry.npmjs.org/popper.js/-/popper.js-1.12.9.tgz",
+      "dev": true
+    },
     "postcss": {
       "version": "5.2.17",
       "from": "postcss@>=5.0.6 <6.0.0",
@@ -3023,12 +3029,6 @@
       "version": "0.2.6",
       "from": "tapable@>=0.2.5 <0.3.0",
       "resolved": "https://registry.npmjs.org/tapable/-/tapable-0.2.6.tgz",
-      "dev": true
-    },
-    "tether": {
-      "version": "1.4.3",
-      "from": "tether@>=1.4.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/tether/-/tether-1.4.3.tgz",
       "dev": true
     },
     "timers-browserify": {

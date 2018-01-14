@@ -1,24 +1,29 @@
 <template>
-    <div>
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Link</th>
-            <th scope="col">Url</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="site in sites">
-            <td>{{site.name}}</td>
-            <td><a target="_blanks" :href="site.url">Link</a></td>
-            <td>{{site.url}}</td>
-            <td><router-link :to="{path: '/editsite/' + site.id}">Edit</router-link></td>
-          </tr>
+  <div>
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Link</th>
+          <th scope="col">Url</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="site in sites">
+          <td>{{site.name}}</td>
+          <td>
+            <a target="_blanks" :href="site.url">Link</a>
+          </td>
+          <td>{{site.url}}</td>
+          <td>
+            <router-link :to="{path: '/editsite/' + site.id}">Edit</router-link>
+          </td>
+        </tr>
 
-        </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script src="./sitelist.ts"></script>

@@ -4,7 +4,7 @@ namespace WebsiteDirectory.Models
 {
     public class SearchViewModel
     {
-        public List<SearchItem> Sites { get; set; }
+        public List<SearchItem> Websites { get; set; }
         public List<SearchItem> Modes { get; set; }
         public List<SearchItem> Databases { get; set; }
         public List<SearchItem> Companies { get; set; }
