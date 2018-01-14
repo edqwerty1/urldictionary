@@ -28,8 +28,10 @@ namespace website_directory.Controllers
                 SelectedMode = url.Mode.Id,
                 SelectedPurpose = url.Purpose.Id,
                 SelectedWebsite = url.Website.Id
-                }).First(t => t.Id == id);
-            
+                }).FirstOrDefault(t => t.Id == id);
+            if(viewModel == null)
+            viewModel = new UrlViewModel();
+
                 viewModel.Companies = database.Companies.OrderBy(t => t.Name).ToList();
                 viewModel.Databases = database.Databases.OrderBy(t => t.Name).ToList();
                 viewModel.Modes = database.Modes.OrderBy(t => t.Name).ToList();
@@ -45,10 +47,10 @@ namespace website_directory.Controllers
             database.WebsiteUrls.Add(new WebsiteUrl
             {
                 Company = database.Companies.First(c => c.Id == model.SelectedCompany),
-                Database = database.Databases.First(c => c.Id == model.SelectedCompany),
-                Mode = database.Modes.First(c => c.Id == model.SelectedCompany),
-                Purpose = database.Purposes.First(c => c.Id == model.SelectedCompany),
-                Website = database.Websites.First(c => c.Id == model.SelectedCompany),
+                Database = database.Databases.First(c => c.Id == model.SelectedDatabase),
+                Mode = database.Modes.First(c => c.Id == model.SelectedMode),
+                Purpose = database.Purposes.First(c => c.Id == model.SelectedPurpose),
+                Website = database.Websites.First(c => c.Id == model.SelectedWebsite),
                 Url = model.Url,
                 Name = model.Name
             });
@@ -63,10 +65,10 @@ namespace website_directory.Controllers
             var url = database.WebsiteUrls.First(t => t.Id == urlId);
 
             url.Company = database.Companies.First(c => c.Id == model.SelectedCompany);
-            url.Database = database.Databases.First(c => c.Id == model.SelectedCompany);
-            url.Mode = database.Modes.First(c => c.Id == model.SelectedCompany);
-            url.Purpose = database.Purposes.First(c => c.Id == model.SelectedCompany);
-            url.Website = database.Websites.First(c => c.Id == model.SelectedCompany);
+            url.Database = database.Databases.First(c => c.Id == model.SelectedDatabase);
+            url.Mode = database.Modes.First(c => c.Id == model.SelectedMode);
+            url.Purpose = database.Purposes.First(c => c.Id == model.SelectedPurpose);
+            url.Website = database.Websites.First(c => c.Id == model.SelectedWebsite);
             url.Name = model.Name;
             url.Url = model.Url;
 
