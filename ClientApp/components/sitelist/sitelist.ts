@@ -8,7 +8,7 @@ interface SiteViewModel {
 
 @Component
 export default class SiteListComponent extends Vue {
-    @Prop() sites: SiteViewModel[] = [];// = [{id:1, name: "test", url:"http://www.google.com"}, {id:1, name: "test", url:"www.google.com"}]
+    @Prop() sites: SiteViewModel[]// = [{id:1, name: "test", url:"http://www.google.com"}, {id:1, name: "test", url:"www.google.com"}]
     mounted() {
 
     }

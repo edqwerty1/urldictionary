@@ -17,7 +17,8 @@ module.exports = (env) => {
                 'bootstrap/dist/css/bootstrap.css',
                 'bootstrap',
                 'vue',
-                'vue-router'
+                'vue-router',
+                'js-cookie'
             ],
         },
         module: {

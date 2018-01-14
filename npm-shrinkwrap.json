@@ -2,6 +2,11 @@
   "name": "WebsiteDirectory",
   "version": "0.0.0",
   "dependencies": {
+    "@types/js-cookie": {
+      "version": "2.1.0",
+      "from": "@types/js-cookie@latest",
+      "resolved": "https://registry.npmjs.org/@types/js-cookie/-/js-cookie-2.1.0.tgz"
+    },
     "@types/webpack-env": {
       "version": "1.13.0",
       "from": "@types/webpack-env@>=1.13.0 <2.0.0",
@@ -1886,6 +1891,12 @@
       "version": "1.6.14",
       "from": "js-beautify@>=1.6.3 <2.0.0",
       "resolved": "https://registry.npmjs.org/js-beautify/-/js-beautify-1.6.14.tgz",
+      "dev": true
+    },
+    "js-cookie": {
+      "version": "2.2.0",
+      "from": "js-cookie@latest",
+      "resolved": "https://registry.npmjs.org/js-cookie/-/js-cookie-2.2.0.tgz",
       "dev": true
     },
     "js-tokens": {

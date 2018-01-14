@@ -14,11 +14,11 @@ namespace website_directory.Controllers
             this.database = database;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{id:int}")]
         public UrlViewModel GetUrl(int id)
         {
-            var url = database.WebsiteUrls.First(t => t.Id == id);
-            var viewModel = new UrlViewModel
+            var viewModel = database.WebsiteUrls.Select(url =>
+             new UrlViewModel
             {
                 Url = url.Url,
                 Id = url.Id,
@@ -27,13 +27,15 @@ namespace website_directory.Controllers
                 SelectedDatabase = url.Database.Id,
                 SelectedMode = url.Mode.Id,
                 SelectedPurpose = url.Purpose.Id,
-                SelectedWebsite = url.Website.Id,
-                Companies = database.Companies.OrderBy(t => t.Name).ToList(),
-                Databases = database.Databases.OrderBy(t => t.Name).ToList(),
-                Modes = database.Modes.OrderBy(t => t.Name).ToList(),
-                Purposes = database.Purposes.OrderBy(t => t.Name).ToList(),
-                Websites = database.Websites.OrderBy(t => t.Name).ToList(),
-            };
+                SelectedWebsite = url.Website.Id
+                }).First(t => t.Id == id);
+            
+                viewModel.Companies = database.Companies.OrderBy(t => t.Name).ToList();
+                viewModel.Databases = database.Databases.OrderBy(t => t.Name).ToList();
+                viewModel.Modes = database.Modes.OrderBy(t => t.Name).ToList();
+                viewModel.Purposes = database.Purposes.OrderBy(t => t.Name).ToList();
+                viewModel.Websites = database.Websites.OrderBy(t => t.Name).ToList();
+            
             return viewModel;
         }
 
@@ -56,7 +58,7 @@ namespace website_directory.Controllers
         }
 
         [HttpPut("{urlId:int}/[action]")]
-        public IActionResult EditUrl(int urlId, UrlViewModel model)
+        public IActionResult EditUrl(int urlId, [FromBody]UrlViewModel model)
         {
             var url = database.WebsiteUrls.First(t => t.Id == urlId);
 
@@ -69,7 +71,7 @@ namespace website_directory.Controllers
             url.Url = model.Url;
 
             database.SaveChanges();
-            return null;
+            return Ok();
         }
     }
 }

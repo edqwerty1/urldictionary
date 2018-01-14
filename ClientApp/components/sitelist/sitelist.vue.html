@@ -13,6 +13,7 @@
             <td>{{site.name}}</td>
             <td><a target="_blanks" :href="site.url">Link</a></td>
             <td>{{site.url}}</td>
+            <td><router-link :to="{path: '/editsite/' + site.id}">Edit</router-link></td>
           </tr>
 
         </tbody>

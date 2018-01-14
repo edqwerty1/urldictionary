@@ -8,22 +8,22 @@
             </div>
             <div class="col-md-12">
                 <label class="checkbox-inline" v-for="mode in searchViewModel.modes">
-                    <input type="checkbox" :id="'inlineCheckbox-' + mode.id" :value="mode.id" v-model="mode.selected"> {{ mode.name }}
+                    <input v-on:click="search" type="checkbox" :id="'inlineCheckbox-' + mode.id" :value="mode.id" v-model="mode.selected"> {{ mode.name }}
                 </label>
             </div>
             <div class="col-md-12">
                 <label class="checkbox-inline" v-for="database in searchViewModel.databases">
-                    <input type="checkbox" :id="'inlineCheckbox-' + database.id" :value="database.id" v-model="database.selected"> {{ database.name }}
+                    <input v-on:click="search" type="checkbox" :id="'inlineCheckbox-' + database.id" :value="database.id" v-model="database.selected"> {{ database.name }}
                 </label>
             </div>
             <div class="col-md-12">
                 <label class="checkbox-inline" v-for="company in searchViewModel.companies">
-                    <input type="checkbox" :id="'inlineCheckbox-' + company.id" :value="company.id" v-model="company.selected"> {{ company.name }}
+                    <input v-on:click="search" type="checkbox" :id="'inlineCheckbox-' + company.id" :value="company.id" v-model="company.selected"> {{ company.name }}
                 </label>
             </div>
             <div class="col-md-12">
                 <label class="checkbox-inline" v-for="purpose in searchViewModel.purposes">
-                    <input type="checkbox" :id="'inlineCheckbox-' + purpose.id" :value="purpose.id" v-model="purpose.selected"> {{ purpose.name }}
+                    <input v-on:click="search" type="checkbox" :id="'inlineCheckbox-' + purpose.id" :value="purpose.id" v-model="purpose.selected"> {{ purpose.name }}
                 </label>
             </div>
         </form>
