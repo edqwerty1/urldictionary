@@ -62,11 +62,11 @@ namespace website_directory.Controllers
             {
                 Id = t.Id,
                 Name = t.Name,
-                Companies = t.Companies,
-                Purposes = t.Purposes,
-                Websites = t.Websites,
-                Databases = t.Databases,
-                Modes = t.Modes
+                Companies = t.Companies.Select(c => c.Company).ToList(),
+                Purposes = t.Purposes.Select(c => c.Purpose).ToList(),
+                Websites = t.Websites.Select(c => c.Website).ToList(),
+                Databases = t.Databases.Select(c => c.Database).ToList(),
+                Modes = t.Modes.Select(c => c.Mode).ToList()
             }).ToList();
         }
 
@@ -90,11 +90,11 @@ namespace website_directory.Controllers
             var profile = new Profile{
                 Name = model.Name
             };
-            profile.Companies = database.Companies.Where(db => model.Companies.Any(m => m.Id == db.Id)).ToList();
-            profile.Databases = database.Databases.Where(db => model.Databases.Any(m => m.Id == db.Id)).ToList();
-            profile.Purposes = database.Purposes.Where(db => model.Purposes.Any(m => m.Id == db.Id)).ToList();
-            profile.Websites = database.Websites.Where(db => model.Websites.Any(m => m.Id == db.Id)).ToList();
-            profile.Modes = database.Modes.Where(db => model.Modes.Any(m => m.Id == db.Id)).ToList();
+            profile.Companies = database.Companies.Where(db => model.Companies.Any(m => m.Id == db.Id)).Select(t => new CompanyProfile { Company = t, Profile = profile}).ToList();
+            profile.Databases = database.Databases.Where(db => model.Databases.Any(m => m.Id == db.Id)).Select(t => new DatabaseProfile { Database = t, Profile = profile }).ToList();
+            profile.Purposes = database.Purposes.Where(db => model.Purposes.Any(m => m.Id == db.Id)).Select(t => new PurposeProfile { Purpose = t, Profile = profile }).ToList();
+            profile.Websites = database.Websites.Where(db => model.Websites.Any(m => m.Id == db.Id)).Select(t => new WebsiteProfile { Website = t, Profile = profile }).ToList();
+            profile.Modes = database.Modes.Where(db => model.Modes.Any(m => m.Id == db.Id)).Select(t => new ModeProfile { Mode = t, Profile = profile }).ToList();
 
             database.Profiles.Add(profile);
             database.SaveChanges();
@@ -108,11 +108,11 @@ namespace website_directory.Controllers
             {
                 Id = t.Id,
                 Name = t.Name,
-                Companies = t.Companies,
-                Purposes = t.Purposes,
-                Websites = t.Websites,
-                Databases = t.Databases,
-                Modes = t.Modes
+                Companies = t.Companies.Select(c => c.Company).ToList(),
+                Purposes = t.Purposes.Select(c => c.Purpose).ToList(),
+                Websites = t.Websites.Select(c => c.Website).ToList(),
+                Databases = t.Databases.Select(c => c.Database).ToList(),
+                Modes = t.Modes.Select(c => c.Mode).ToList()
             }).First(t => t.Name.ToLower() == profileName.ToLower());
         }
     }
