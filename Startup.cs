@@ -33,7 +33,7 @@ namespace WebsiteDirectory
         //// Development ConfigureServices
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            services.AddDbContext<WebsiteContext>(options => options.UseSqlite("Data Source=website.db"));
+            services.AddDbContext<WebsiteContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
         }
 

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace WebsiteDirectory.Domain
     {
         public static void Initialize(WebsiteContext context)
         {
-            context.Database.EnsureCreated();
+            context.Database.Migrate();
 
             // Look for any students.
             if (context.Websites.Any())
